@@ -173,7 +173,7 @@ Runtime and throughput scaling evaluated on distributed Spark vs. single-node la
 
 ### Scalability Curves (Runtime & Throughput vs. Data Size $N$)
 
-Regenerate figures from the committed JSON before presenting them: `python plot_results.py`. The current checked-in scalability PNG predates the corrected JSON timings and laptop measurement notes.
+The checked-in scalability and fairness-accuracy figures were regenerated from the committed JSON with `python plot_results.py`. Rerun that command after updating the result files.
 
 ![Scalability Curves](output/scalability_curves.png)
 

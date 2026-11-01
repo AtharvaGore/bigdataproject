@@ -58,13 +58,13 @@ The committed raw JSON reports these Spark runtimes. They depend on machine conf
 | 500,000 | 7.611 | 27.587 | 7.796 | Skipped; estimated OOM entry |
 | 1,000,000 | 8.382 | 30.683 | 9.028 | Skipped; estimated OOM entry |
 
-Spark timings are not monotonic at smaller sizes, consistent with startup, scheduling, caching, and measurement noise. The benchmark script bypasses the laptop baseline above 250,000 rows and writes estimated memory/OOM labels. The README table and notebook narrative now reflect the raw JSON values. Regenerate the scalability plot from the same JSON before presenting it.
+Spark timings are not monotonic at smaller sizes, consistent with startup, scheduling, caching, and measurement noise. The benchmark script bypasses the laptop baseline above 250,000 rows and writes estimated memory/OOM labels. The README table and notebook narrative now reflect the raw JSON values. The scalability plot was regenerated from the same JSON before submission.
 
 ### Limitations and recommendations
 
 - Resolve the course data policy for public person-level records; use fully synthetic data if required.
 - Rerun from a clean environment and record hardware, Spark configuration, executor and partition counts, source versions, and run date.
-- Regenerate the scalability plot from the committed JSON. Label skipped laptop cases as estimates, or measure them under an explicit memory cap.
+- Label skipped laptop cases as estimates, or measure them under an explicit memory cap.
 - Describe row replication as a compute stress test and avoid presenting it as evidence of fairness generalization to larger populations.
 - Keep train, validation, and test data separate for tuning and final evaluation. Report group counts and uncertainty where feasible.
 - Treat fairness metrics as diagnostic evidence and document harms and trade-offs relevant to any intended deployment.

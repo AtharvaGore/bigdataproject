@@ -10,7 +10,7 @@ The README scalability table and results notebook have been updated to match the
 | 500,000 | 7.611 | 27.587 | 7.796 | **not run**; JSON records estimated 400 MB and an OOM status |
 | 1,000,000 | 8.382 | 30.683 | 9.028 | **not run**; JSON records estimated 800 MB and an OOM status |
 
-These values are the contents of the committed raw JSON, not a fresh rerun. The script intentionally bypasses the laptop baseline above 250,000 rows, so call those entries estimates or rerun under a declared memory cap and report the observed outcome. The checked-in scalability PNG predates these corrections; regenerate it with `python plot_results.py` before presenting the plot.
+These values are the contents of the committed raw JSON, not a fresh rerun. The script intentionally bypasses the laptop baseline above 250,000 rows, so call those entries estimates or rerun under a declared memory cap and report the observed outcome. The scalability and fairness-accuracy PNGs have now been regenerated from the committed JSON with `python plot_results.py`.
 
 The input scaling procedure samples the dataset for smaller sizes and repeats the source dataframe for larger sizes. State this clearly in the report and plots. Repeated rows can characterize pipeline execution cost but cannot support a claim that fairness outcomes generalize to a larger independent population.
 
