@@ -1,0 +1,127 @@
+{
+  "50000": {
+    "total_rows": 49997,
+    "train_rows": 40166,
+    "val_rows": 9831,
+    "spark_preprocessing_reweighing": {
+      "runtime_sec": 12.286,
+      "throughput_rows_per_sec": 4069.6
+    },
+    "spark_inprocessing_fair_grid": {
+      "runtime_sec": 31.606,
+      "throughput_rows_per_sec": 1581.9,
+      "best_lambda": 0.6
+    },
+    "spark_postprocessing_roc": {
+      "runtime_sec": 8.058,
+      "throughput_rows_per_sec": 6204.6,
+      "best_theta": 0.08
+    },
+    "single_node_laptop": {
+      "runtime_sec": 0.634,
+      "throughput_rows_per_sec": 78876.5,
+      "peak_memory_mb": 7.75,
+      "status": "SUCCESS"
+    }
+  },
+  "100000": {
+    "total_rows": 100000,
+    "train_rows": 80211,
+    "val_rows": 19789,
+    "spark_preprocessing_reweighing": {
+      "runtime_sec": 6.715,
+      "throughput_rows_per_sec": 14891.8
+    },
+    "spark_inprocessing_fair_grid": {
+      "runtime_sec": 24.937,
+      "throughput_rows_per_sec": 4010.0,
+      "best_lambda": 0.6
+    },
+    "spark_postprocessing_roc": {
+      "runtime_sec": 6.377,
+      "throughput_rows_per_sec": 15681.7,
+      "best_theta": 0.08
+    },
+    "single_node_laptop": {
+      "runtime_sec": 3.192,
+      "throughput_rows_per_sec": 31326.4,
+      "peak_memory_mb": 13.92,
+      "status": "SUCCESS"
+    }
+  },
+  "250000": {
+    "total_rows": 250000,
+    "train_rows": 200228,
+    "val_rows": 49772,
+    "spark_preprocessing_reweighing": {
+      "runtime_sec": 6.805,
+      "throughput_rows_per_sec": 36736.2
+    },
+    "spark_inprocessing_fair_grid": {
+      "runtime_sec": 24.957,
+      "throughput_rows_per_sec": 10017.1,
+      "best_lambda": 0.6
+    },
+    "spark_postprocessing_roc": {
+      "runtime_sec": 7.102,
+      "throughput_rows_per_sec": 35202.8,
+      "best_theta": 0.08
+    },
+    "single_node_laptop": {
+      "runtime_sec": 5.587,
+      "throughput_rows_per_sec": 44748.5,
+      "peak_memory_mb": 34.82,
+      "status": "SUCCESS"
+    }
+  },
+  "500000": {
+    "total_rows": 500000,
+    "train_rows": 400122,
+    "val_rows": 99878,
+    "spark_preprocessing_reweighing": {
+      "runtime_sec": 7.611,
+      "throughput_rows_per_sec": 65696.9
+    },
+    "spark_inprocessing_fair_grid": {
+      "runtime_sec": 27.587,
+      "throughput_rows_per_sec": 18124.8,
+      "best_lambda": 0.6
+    },
+    "spark_postprocessing_roc": {
+      "runtime_sec": 7.796,
+      "throughput_rows_per_sec": 64138.9,
+      "best_theta": 0.08
+    },
+    "single_node_laptop": {
+      "runtime_sec": null,
+      "throughput_rows_per_sec": null,
+      "peak_memory_mb": 400.0,
+      "status": "OOM: Exceeds standard laptop single-process RAM limit"
+    }
+  },
+  "1000000": {
+    "total_rows": 1000000,
+    "train_rows": 800299,
+    "val_rows": 199701,
+    "spark_preprocessing_reweighing": {
+      "runtime_sec": 8.382,
+      "throughput_rows_per_sec": 119299.7
+    },
+    "spark_inprocessing_fair_grid": {
+      "runtime_sec": 30.683,
+      "throughput_rows_per_sec": 32591.3,
+      "best_lambda": 0.6
+    },
+    "spark_postprocessing_roc": {
+      "runtime_sec": 9.028,
+      "throughput_rows_per_sec": 110766.0,
+      "best_theta": 0.08
+    },
+    "single_node_laptop": {
+      "runtime_sec": null,
+      "throughput_rows_per_sec": null,
+      "peak_memory_mb": 800.0,
+      "status": "OOM: Exceeds standard laptop single-process RAM limit"
+    }
+  }
+}

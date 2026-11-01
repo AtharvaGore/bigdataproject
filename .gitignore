@@ -1,0 +1,36 @@
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+
+# Python cache & artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Datasets (Do NOT push large CSVs or Census archives to GitHub)
+data/*.csv
+data/*.raw.csv
+data/*.zip
+data/*.gz
+data/pums/
+data/2018/
+!data/download_datasets.py
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Spark / Hadoop temporary files
+metastore_db/
+derby.log
+checkpoint/
+.spark-staging/
+
+# OS and Editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

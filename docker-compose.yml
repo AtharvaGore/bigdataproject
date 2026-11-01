@@ -1,0 +1,13 @@
+services:
+  spark-fairness:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: spark_bias_mitigation
+    volumes:
+      - ./output:/workspace/output
+      - ./data:/workspace/data
+    environment:
+      - SPARK_LOCAL_IP=127.0.0.1
+      - JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
+    command: ./run_pipeline.sh --quick

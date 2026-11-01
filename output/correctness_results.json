@@ -1,0 +1,70 @@
+{
+  "UCI_Adult": {
+    "Baseline": {
+      "accuracy": 0.8454395377631034,
+      "statistical_parity_diff": -0.16698182364704872,
+      "disparate_impact_ratio": 0.3202956498384172,
+      "unpriv_favorable_rate": 0.0786864931846344,
+      "priv_favorable_rate": 0.2456683168316831,
+      "total_count": 4846
+    },
+    "Pre-processing (Reweighing)": {
+      "accuracy": 0.8408997111019396,
+      "statistical_parity_diff": -0.07874668740108214,
+      "disparate_impact_ratio": 0.6090487040210968,
+      "unpriv_favorable_rate": 0.1226765799256505,
+      "priv_favorable_rate": 0.20142326732673263,
+      "total_count": 4846
+    },
+    "In-processing (Fair Grid Search)": {
+      "accuracy": 0.8268675196037968,
+      "statistical_parity_diff": -0.012225176978664432,
+      "disparate_impact_ratio": 0.9089590506958958,
+      "unpriv_favorable_rate": 0.1220570012391573,
+      "priv_favorable_rate": 0.13428217821782173,
+      "total_count": 4846
+    },
+    "Post-processing (ROC)": {
+      "accuracy": 0.8305819232356582,
+      "statistical_parity_diff": -0.038226011262836354,
+      "disparate_impact_ratio": 0.7478643501961139,
+      "unpriv_favorable_rate": 0.11338289962825272,
+      "priv_favorable_rate": 0.15160891089108908,
+      "total_count": 4846
+    }
+  },
+  "COMPAS": {
+    "Baseline": {
+      "accuracy": 0.6705729166666657,
+      "statistical_parity_diff": -0.26817588762734795,
+      "disparate_impact_ratio": 0.6446124415986755,
+      "unpriv_favorable_rate": 0.4864253393665147,
+      "priv_favorable_rate": 0.7546012269938627,
+      "total_count": 768
+    },
+    "Pre-processing (Reweighing)": {
+      "accuracy": 0.6679687499999991,
+      "statistical_parity_diff": -0.2636510007495199,
+      "disparate_impact_ratio": 0.6506088364042445,
+      "unpriv_favorable_rate": 0.49095022624434276,
+      "priv_favorable_rate": 0.7546012269938627,
+      "total_count": 768
+    },
+    "In-processing (Fair Grid Search)": {
+      "accuracy": 0.6263020833333325,
+      "statistical_parity_diff": -0.17248702218027245,
+      "disparate_impact_ratio": 0.8168378852409274,
+      "unpriv_favorable_rate": 0.7692307692307675,
+      "priv_favorable_rate": 0.94171779141104,
+      "total_count": 768
+    },
+    "Post-processing (ROC)": {
+      "accuracy": 0.6640624999999991,
+      "statistical_parity_diff": -0.031701968186991,
+      "disparate_impact_ratio": 0.9503132613977457,
+      "unpriv_favorable_rate": 0.6063348416289579,
+      "priv_favorable_rate": 0.6380368098159489,
+      "total_count": 768
+    }
+  }
+}
