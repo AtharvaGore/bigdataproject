@@ -33,7 +33,9 @@ def plot_scalability(out_dir):
     # Single-node runtimes
     sn_times = []
     for s in scales:
-        val = data[str(s)]["single_node_laptop"]["runtime_sec"]
+        single_node = data[str(s)]["single_node_laptop"]
+        # Plot only completed measurements; estimated OOM entries are not observations.
+        val = single_node["runtime_sec"] if single_node.get("status") == "SUCCESS" else None
         sn_times.append(val)
         
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
@@ -50,9 +52,8 @@ def plot_scalability(out_dir):
     if valid_sn_x:
         ax1.plot(valid_sn_x, valid_sn_y, marker="x", linewidth=2.2, linestyle="--", color="#d62728", label="Single-Node Laptop (Pandas/Sklearn)")
         
-    # Draw OOM shaded zone for single node
-    ax1.axvspan(300000, max(scales)*1.1, color="#d62728", alpha=0.10, label="Single-Node Laptop OOM Zone")
-    ax1.text(450000, max(t_inproc)*0.4, "Single-Node\nMemory Failure\n(OOM Crash)", color="#d62728", fontweight="bold", fontsize=11)
+    ax1.text(0.98, 0.04, "Laptop baseline not measured above 250K", transform=ax1.transAxes,
+             ha="right", va="bottom", color="#555555", fontsize=9)
     
     ax1.set_xscale("log")
     ax1.set_yscale("log")

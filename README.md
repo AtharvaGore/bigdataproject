@@ -2,8 +2,6 @@
 
 [![Python](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12-blue)](https://www.python.org/)
 [![PySpark](https://img.shields.io/badge/PySpark-3.5%20%2B-orange)](https://spark.apache.org/)
-[![Reproducibility](https://img.shields.io/badge/Pipeline-100%25%20Reproducible-brightgreen)](#reproducible-pipeline)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > **Case Study**: Traditional machine learning fairness toolkits (such as IBM's **AIF360** and Microsoft's **Fairlearn**) run on a single laptop using in-memory Python structures (`pandas`, `numpy`, `scikit-learn`). When enterprise datasets exceed available RAM, these toolkits crash with **Out-Of-Memory (OOM)** errors.
 >
@@ -95,7 +93,7 @@ flowchart TD
 
 ## 3. Quick Setup & Reproducible Pipeline
 
-This repository is designed to be **100% reproducible without committing large dataset files to Git**. Datasets are automatically downloaded on-demand when the pipeline runs.
+The pipeline downloads datasets on demand, so large data files do not need to be committed to Git. Reproduce a run by recording the source versions, environment, Spark settings, and generated outputs.
 
 ### Option A: Local Execution (Recommended)
 
@@ -139,16 +137,16 @@ Evaluated on held-out test splits comparing the Unmitigated Baseline against the
 | :--- | :---: | :---: | :---: | :--- |
 | **Baseline (Unmitigated)** | 84.54% | **0.3203** | -0.1670 | Severe historical gender disparity |
 | **Pre-processing (Reweighing)** | 84.09% | **0.6090** | -0.0787 | Disparity cut by > 50% |
-| **In-processing (Fair Grid Search)** | 82.69% | **0.9090** | **-0.0122** | **Demographic parity achieved** (DIR $\ge 0.80$) |
-| **Post-processing (ROC)** | 83.06% | **0.7479** | -0.0382 | Large fairness gain with negligible accuracy loss |
+| **In-processing (Fair Grid Search)** | 82.69% | **0.9090** | **-0.0122** | DIR above 0.80; SPD is close to zero |
+| **Post-processing (ROC)** | 83.06% | **0.7479** | -0.0382 | Fairness improved; assess the accuracy trade-off |
 
 #### 2. COMPAS Recidivism (5,278 rows — Sensitive: Race)
 | Method | Accuracy | Disparate Impact Ratio | Statistical Parity Diff | Evaluation |
 | :--- | :---: | :---: | :---: | :--- |
 | **Baseline (Unmitigated)** | 67.06% | **0.6446** | -0.2682 | Unfair baseline favoring privileged group |
 | **Pre-processing (Reweighing)** | 66.80% | **0.6506** | -0.2637 | Slight improvement |
-| **In-processing (Fair Grid Search)** | 62.63% | **0.8168** | -0.1725 | Crosses legal 80% fairness threshold |
-| **Post-processing (ROC)** | 66.41% | **0.9503** | **-0.0317** | **Near-perfect parity** (only 0.6% accuracy drop) |
+| **In-processing (Fair Grid Search)** | 62.63% | **0.8168** | -0.1725 | DIR above 0.80 screening threshold |
+| **Post-processing (ROC)** | 66.41% | **0.9503** | **-0.0317** | Lower absolute SPD; evaluate task-specific trade-offs |
 
 ---
 
@@ -158,17 +156,25 @@ Runtime and throughput scaling evaluated on distributed Spark vs. single-node la
 
 | Dataset Size ($N$) | Spark Reweighing Runtime (Throughput) | Spark In-Processing Runtime (Throughput) | Spark ROC Runtime (Throughput) | Single-Node Laptop (Pandas / Sklearn) |
 | :---: | :---: | :---: | :---: | :---: |
-| **50,000 rows** | 11.35s (4,404 rows/s) | 26.58s (1,881 rows/s) | 6.26s (7,993 rows/s) | 0.63s (Memory: 3.2 MB) |
-| **100,000 rows** | 5.89s (16,992 rows/s) | 23.05s (4,339 rows/s) | 5.70s (17,546 rows/s) | 2.59s (Memory: 7.1 MB) |
-| **250,000 rows** | 5.64s (44,348 rows/s) | 20.77s (12,036 rows/s) | 5.25s (47,597 rows/s) | 4.90s (High RAM pressure) |
-| **500,000 rows** | 6.22s (80,388 rows/s) | 22.21s (22,514 rows/s) | 5.31s (94,142 rows/s) | **OOM Failure (Process Crash)** |
-| **1,000,000 rows** | **5.71s (175,138 rows/s)** | **21.52s (46,463 rows/s)** | **6.23s (160,497 rows/s)** | **OOM Failure (Cannot Allocate RAM)** |
+| **50,000 rows** | 12.286s (4,070 rows/s) | 31.606s (1,582 rows/s) | 8.058s (6,205 rows/s) | Measured: 0.634s (7.75 MB traced peak) |
+| **100,000 rows** | 6.715s (14,892 rows/s) | 24.937s (4,010 rows/s) | 6.377s (15,682 rows/s) | Measured: 3.192s (13.92 MB traced peak) |
+| **250,000 rows** | 6.805s (36,736 rows/s) | 24.957s (10,017 rows/s) | 7.102s (35,203 rows/s) | Measured: 5.587s (34.82 MB traced peak) |
+| **500,000 rows** | 7.611s (65,697 rows/s) | 27.587s (18,125 rows/s) | 7.796s (64,139 rows/s) | Not run; OOM status and 400 MB are estimates |
+| **1,000,000 rows** | 8.382s (119,300 rows/s) | 30.683s (32,591 rows/s) | 9.028s (110,766 rows/s) | Not run; OOM status and 800 MB are estimates |
+
+
+**Benchmark notes:** Runtime values above are copied from `output/scalability_results.json`. The laptop baseline runs only through 250,000 rows; larger laptop OOM entries are estimates because the script skips those runs. The scalability script samples the source for smaller sizes and repeats rows for sizes above the available source. Repeated records stress the pipeline but do not represent independent population growth. See [RESULTS_CORRECTIONS.md](RESULTS_CORRECTIONS.md) for details.
+
+**Data-use note:** UCI Adult, COMPAS, and Folktables ACS are public person-level records. Confirm they satisfy the course's restriction on real personal data; if not, replace them with synthetic data and rerun the experiments. Public availability alone does not make person-level records synthetic or anonymous. See [DATA_CARD.md](DATA_CARD.md).
 
 ---
 
 ## 5. Visualizations
 
 ### Scalability Curves (Runtime & Throughput vs. Data Size $N$)
+
+Regenerate figures from the committed JSON before presenting them: `python plot_results.py`. The current checked-in scalability PNG predates the corrected JSON timings and laptop measurement notes.
+
 ![Scalability Curves](output/scalability_curves.png)
 
 ### Fairness vs. Accuracy Trade-Off
