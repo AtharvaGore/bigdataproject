@@ -95,7 +95,7 @@ flowchart TD
 
 The pipeline downloads datasets on demand, so large data files do not need to be committed to Git. Reproduce a run by recording the source versions, environment, Spark settings, and generated outputs.
 
-### Option A: Local Execution (Recommended)
+### Option A: Local Execution (Recommended for linux environments)
 
 #### Prerequisites:
 * **Python**: 3.10, 3.11, or 3.12
